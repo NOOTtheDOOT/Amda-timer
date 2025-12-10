@@ -1,4 +1,4 @@
-// Save this to your Google Drive, and then it should show up as a button on the top of your Google Docs
+// Go to Extentios at the top of google docs, click extensions and then Apps script. paste all this to the blank scripting box and then press the save icon, then it will save this to your Google Drive, and then it should show up as a button on the top of your Google Docs
 function onOpen() {
   var ui = DocumentApp.getUi();
   ui.createMenu("Countdown")
