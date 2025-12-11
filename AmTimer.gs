@@ -22,9 +22,9 @@ function AmandaTimer() {
   var timerText = Utilities.formatString("%02d:%02d mins remaining", hours, mins);
 
   var lines = [];
-  if (daysLeft === 3) lines = ["Dawn of", "The Third Day", "~ 72 Hours Remain ~"];
-  else if (daysLeft === 2) lines = ["Dawn of", "The Second Day", "~ 48 Hours Remain ~"];
-  else if (daysLeft === 1) lines = ["Dawn of", "The Final Day", "~ 24 Hours Remain ~"];
+  if (daysLeft === 4) lines = ["Dawn of", "The Third Day", "~ 72 Hours Remain ~"];
+  else if (daysLeft === 3) lines = ["Dawn of", "The Second Day", "~ 48 Hours Remain ~"];
+  else if (daysLeft === 2) lines = ["Dawn of", "The Final Day", "~ 24 Hours Remain ~"];
   else if (diff > 0) lines = [daysLeft + " days left"];
   else lines = ["It is already too late"];
 
@@ -38,28 +38,32 @@ function AmandaTimer() {
   } else {
     table = body.appendTable([[""]]);
     var cell = table.getCell(0, 0);
-    cell.setBackgroundColor("#6aa84f"); // dark green
+    cell.setBackgroundColor("#6aa84f"); // green
     cell.setPaddingTop(0);
     cell.setPaddingBottom(0);
     cell.setPaddingLeft(0);
     cell.setPaddingRight(0);
+    cell.setVerticalAlignment(DocumentApp.VerticalAlignment.TOP);
   }
 
-  var cell = table.getCell(1, 1);
+  var cell = table.getCell(0, 0);
   cell.clear();
 
-  // Append paragraphs and style them
-  lines.forEach(function(line) {
-    var p = cell.appendParagraph(line);
-    p.setFontFamily("Press Start 2P");
-    p.setForegroundColor("#ffff00"); // bright yellow
-    p.setBackgroundColor("#6aa84f"); // same as cell for safety
-    p.setFontSize(24);
-    p.setAlignment(DocumentApp.HorizontalAlignment.CENTER);
-    p.setSpacingBefore(0);
-    p.setSpacingAfter(0);
-    p.setLineSpacing(1); 
-});
+  // Create a single paragraph and append all lines
+  var p = cell.appendParagraph("");
+  p.setFontFamily("Press Start 2P");
+  p.setForegroundColor("#ffff00");
+  p.setBackgroundColor("#6aa84f");
+  p.setFontSize(24);
+  p.setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+  p.setSpacingBefore(0);
+  p.setSpacingAfter(0);
+  p.setLineSpacing(1);
+
+  lines.forEach(function(line, index) {
+    p.appendText(line);
+    if (index < lines.length - 1) p.appendText("\n");
+  });
 
   // Auto-refresh trigger
   ensureCountdownTrigger();
