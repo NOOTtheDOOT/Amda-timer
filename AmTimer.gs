@@ -38,7 +38,7 @@ function AmandaTimer() {
   } else {
     table = body.appendTable([[""]]);
     var cell = table.getCell(0, 0);
-    cell.setBackgroundColor("#6aa84f"); // green
+    cell.setBackgroundColor("#6aa84f"); // dark green
     cell.setPaddingTop(0);
     cell.setPaddingBottom(0);
     cell.setPaddingLeft(0);
