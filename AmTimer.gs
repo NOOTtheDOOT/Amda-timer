@@ -38,27 +38,35 @@ function AmandaTimer() {
   } else {
     table = body.appendTable([[""]]);
     var cell = table.getCell(0, 0);
-    cell.setBackgroundColor("#6aa84f"); // dark green
+    cell.setBackgroundColor("#6aa84f");
     cell.setPaddingTop(0);
     cell.setPaddingBottom(0);
     cell.setPaddingLeft(0);
     cell.setPaddingRight(0);
     cell.setVerticalAlignment(DocumentApp.VerticalAlignment.TOP);
+
+    // Force initial paragraph style
+    var p = cell.getChild(0).asParagraph(); // get the first (empty) paragraph
+    p.setFontFamily("Press Start 2P");
+    p.setFontSize(24);
+    p.setForegroundColor("#ffff00");
+    p.setAlignment(DocumentApp.HorizontalAlignment.CENTER);
+    p.setSpacingBefore(0);
+    p.setSpacingAfter(0);
+    p.setLineSpacing(1.5);
   }
 
+  // Clear the cell and append timer lines
   var cell = table.getCell(0, 0);
   cell.clear();
-
-  // Create a single paragraph and append all lines
-  var p = cell.appendParagraph("");
+  var p = cell.appendParagraph(""); // single paragraph
   p.setFontFamily("Press Start 2P");
-  p.setForegroundColor("#ffff00");
-  p.setBackgroundColor("#6aa84f");
   p.setFontSize(24);
+  p.setForegroundColor("#ffff00");
   p.setAlignment(DocumentApp.HorizontalAlignment.CENTER);
   p.setSpacingBefore(0);
   p.setSpacingAfter(0);
-  p.setLineSpacing(1);
+  p.setLineSpacing(1.5);
 
   lines.forEach(function(line, index) {
     p.appendText(line);
